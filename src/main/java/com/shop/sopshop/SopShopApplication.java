@@ -20,7 +20,7 @@ public class SopShopApplication {
 
     @RequestMapping("/")
     String home(){
-        return "Drinks Shop\n/menu to browse menu.\n/menu/{id} to view menu.\n/menu/{id}/add to add menu to cart.\n/checkout to checkout.";
+        return "Drinks Shop\n/menu to browse menu.\n/menu/{id} to view menu.\n/menu/{id}/add to add menu to cart.\n/checkout to checkout.\n/clear to clear cart.";
     }
 
     @RequestMapping("/menu")
@@ -41,6 +41,13 @@ public class SopShopApplication {
         cart.add(DrinkMenuFactory.getDrinkMenu(id));
         cost += DrinkMenuFactory.getDrinkMenu(id).getPrice();
         return DrinkMenuFactory.getDrinkMenu(id).getName() + " added to your cart.\nTotal cost:" + cost;
+    }
+
+    @RequestMapping({"/clear"})
+    String clear() {
+        cost = 0;
+        cart.clear();
+        return "Cart is cleared!";
     }
 
     @RequestMapping({"/checkout"})
